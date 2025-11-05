@@ -8,6 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
