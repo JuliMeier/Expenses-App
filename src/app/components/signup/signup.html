@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card mt-5">
+                <div class="card-header bg-primary bg-opacity-75">
+                    <h3 class="card-title mb-0 text-center text-white">Registrate</h3>
+                </div>
+                <div class="card-body">
+
+                    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                [ngClass]="{'is-invalid' : hasError('email', 'required') || hasError('email', 'email')}">
+                            <div class="invalid-feedback" *ngIf="hasError('email', 'required')">
+                                Email es requerido.
+                            </div>
+                            <div class="invalid-feedback" *ngIf="hasError('email', 'email')">
+                                Por favor ingresa un email válido.
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" formControlName="password"
+                                [ngClass]="{'is-invalid' : hasError('password', 'required') || hasError('password', 'minlength')}">
+
+                            <div class="invalid-feedback" *ngIf="hasError('password', 'required')">
+                                La contraseña es requerida.
+                            </div>
+                            <div class="invalid-feedback" *ngIf="hasError('password', 'minlength')">
+                                La contraseña debe tener al menos 6 caracteres.
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword"
+                                [ngClass]="{'is-invalid' : hasError('confirmPassword', 'required') || signupForm.hasError('mismatch')}"
+                                formControlName="confirmPassword">
+
+                            <div class="invalid-feedback" *ngIf="hasError('confirmPassword', 'required')">
+                                La confirmación de la contraseña es requerida.
+                            </div>
+                            <div class="invalid-feedback" *ngIf="signupForm.hasError('mismatch')">
+                                Las contraseñas no coinciden.
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="!signupForm.valid">Registrate</button>
+                        </div>
+                        <div class="mt-3 mb-0 text-center">
+                            <p>¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

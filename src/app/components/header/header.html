@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark bg-opacity-25">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand me-4" href="">Expenses Tracker</a>
+        </div>
+        <div class="ms-auto d-flex align-items-center" *ngIf="authservice.currentUser$ | async ">
+            <a class="navbar-brand  me-4 text-secondary" [routerLink]="'/add'"> 
+                <i class="bi bi-plus-circle"></i>
+                Agregar
+            </a>
+            <a role="button" class="navbar-brand  me-4 text-secondary" (click)="authservice.logout()" >
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar 
+            </a>
+    
+        </div>
+
+        <div class="ms-auto d-flex align-items-center" *ngIf="!(authservice.currentUser$ | async )">
+
+            <a class="navbar-brand  me-4 text-secondary" [routerLink]="'/login'">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Login
+            </a>
+        </div>
+    </div>
+
+</nav>
+

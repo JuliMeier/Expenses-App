@@ -1,0 +1,67 @@
+<div class="container-fluid px-4 mt-4">
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <div class="card h-100 bg-success bg-opacity-75 text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Ingresos</h5>
+                    <h3 class="card-text">{{getTotalIncome() | currency}} </h3>                     
+                </div>               
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 bg-danger bg-opacity-75 text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Egresos</h5>
+                    <h3 class="card-text">{{getTotalExpense()| currency}} </h3>                     
+                </div>               
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 bg-opacity-75 text-white"  [ngClass]="getBalance() >= 0 ? 'bg-success' : 'bg-danger'">
+                <div class="card-body">
+                    <h5 class="card-title">Saldo Neto</h5>
+                    <h3 class="card-text fw-bold">{{getBalance()| currency}} </h3>                     
+                </div>               
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <h3>Transacciones</h3>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 15%">Fecha</th>
+                    <th style="width: 15%">Tipo</th>
+                    <th style="width: 25%">Categoria</th>
+                    <th style="width: 20%">Cantidad</th>
+                    <th style="width: 15%">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transaction of transactions" >
+                   <td>{{transaction.createdAt | date}}</td>
+                   <td [ngClass]="transaction.type === 'Income' ?
+                   'text-success': 'text-danger'" >{{transaction.type}}</td>
+                   <td >{{transaction.category}}</td>
+                   <td [ngClass]="transaction.type === 'Income' ?
+                   'text-success': 'text-danger'">{{transaction.amount | currency}}</td>
+                   <td>
+                    <button class="btn btn-sm btn-outline-primary me-1" (click)="editTransaction(transaction.id)" >
+                        <i class ="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteTransaction(transaction.id)" >
+                        <i class ="bi bi-trash-fill"></i>
+                    </button>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
